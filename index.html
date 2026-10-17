@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>永久地址发布页</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 引入Vue 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="background-container">
+            <div class="particles" v-for="n in 50" :key="n"></div>
+        </div>
+
+        <header>
+            <div class="logo">
+                <h1>{{ siteName }}</h1>
+            </div>
+            <div class="slogan">
+                <p>{{ slogan }}</p>
+            </div>
+        </header>
+
+        <main>
+            <div class="announcement">
+                <div class="announcement-content">
+                    <i class="fas fa-bullhorn"></i>
+                    <p>{{ announcement }}</p>
+                </div>
+            </div>
+
+            <div class="cards-container">
+                <div class="card" v-for="(site, index) in sites" :key="index" @click="copyUrl(site.url)">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-icon">
+                                <i :class="site.icon"></i>
+                            </div>
+                            <div class="card-title">{{ site.name }}</div>
+                            <div class="card-subtitle">{{ site.description }}</div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-url">{{ site.url }}</div>
+                            <div class="copy-button">
+                                <i class="fas fa-copy"></i> 点击复制
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <p>{{ footerText }}</p>
+                <p class="update-time">最后更新时间: {{ lastUpdateTime }}</p>
+            </div>
+        </footer>
+
+        <div class="notification" :class="{active: showNotification}">
+            <div class="notification-content">
+                <i class="fas fa-check-circle"></i>
+                <span>{{ notificationMessage }}</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

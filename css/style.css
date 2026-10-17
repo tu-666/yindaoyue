@@ -1,0 +1,333 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+:root {
+    --primary-color: #4a6bff;
+    --secondary-color: #ff4a8d;
+    --background-color: #0a0e1f;
+    --card-color: rgba(255, 255, 255, 0.1);
+    --text-color: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 背景粒子效果 */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particles {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: float 15s infinite linear;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(100px);
+        opacity: 0;
+    }
+}
+
+/* 页面布局 */
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    padding: 40px 0;
+    position: relative;
+}
+
+.logo h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 10px;
+    text-shadow: 0 5px 15px rgba(74, 107, 255, 0.5);
+    animation: glow 3s infinite alternate;
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 10px rgba(74, 107, 255, 0.5);
+    }
+    100% {
+        text-shadow: 0 0 20px rgba(255, 74, 141, 0.8);
+    }
+}
+
+.slogan p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-style: italic;
+}
+
+/* 公告栏 */
+.announcement {
+    background: rgba(74, 107, 255, 0.2);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(74, 107, 255, 0.3);
+}
+
+.announcement-content {
+    display: flex;
+    align-items: center;
+}
+
+.announcement-content i {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    color: var(--primary-color);
+}
+
+/* 卡片容器 */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+/* 卡片样式 */
+.card {
+    height: 180px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.card-front {
+    background: linear-gradient(135deg, rgba(74, 107, 255, 0.2), rgba(255, 74, 141, 0.2));
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-back {
+    background: linear-gradient(135deg, rgba(255, 74, 141, 0.2), rgba(74, 107, 255, 0.2));
+    transform: rotateY(180deg);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-icon {
+    transform: scale(1.1);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.card-subtitle {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+}
+
+.card-url {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    word-break: break-all;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.copy-button {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.copy-button:hover {
+    background: var(--primary-color);
+}
+
+/* 页脚 */
+footer {
+    margin-top: auto;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+.update-time {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* 通知提示 */
+.notification {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(74, 107, 255, 0.9);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: bottom 0.5s ease;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.notification.active {
+    bottom: 30px;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+}
+
+.notification-content i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .logo h1 {
+        font-size: 2.5rem;
+    }
+    
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .card {
+        height: 160px;
+    }
+}
+
+/* 为粒子设置随机位置和动画延迟 */
+.particles:nth-child(1) { left: 10%; animation-delay: 0s; }
+.particles:nth-child(2) { left: 20%; animation-delay: 2s; }
+.particles:nth-child(3) { left: 30%; animation-delay: 4s; }
+.particles:nth-child(4) { left: 40%; animation-delay: 6s; }
+.particles:nth-child(5) { left: 50%; animation-delay: 8s; }
+.particles:nth-child(6) { left: 60%; animation-delay: 10s; }
+.particles:nth-child(7) { left: 70%; animation-delay: 12s; }
+.particles:nth-child(8) { left: 80%; animation-delay: 14s; }
+.particles:nth-child(9) { left: 90%; animation-delay: 16s; }
+.particles:nth-child(10) { left: 5%; animation-delay: 1s; }
+.particles:nth-child(11) { left: 15%; animation-delay: 3s; }
+.particles:nth-child(12) { left: 25%; animation-delay: 5s; }
+.particles:nth-child(13) { left: 35%; animation-delay: 7s; }
+.particles:nth-child(14) { left: 45%; animation-delay: 9s; }
+.particles:nth-child(15) { left: 55%; animation-delay: 11s; }
+.particles:nth-child(16) { left: 65%; animation-delay: 13s; }
+.particles:nth-child(17) { left: 75%; animation-delay: 15s; }
+.particles:nth-child(18) { left: 85%; animation-delay: 17s; }
+.particles:nth-child(19) { left: 95%; animation-delay: 19s; }
+.particles:nth-child(20) { left: 7%; animation-delay: 0.5s; }
+.particles:nth-child(21) { left: 17%; animation-delay: 2.5s; }
+.particles:nth-child(22) { left: 27%; animation-delay: 4.5s; }
+.particles:nth-child(23) { left: 37%; animation-delay: 6.5s; }
+.particles:nth-child(24) { left: 47%; animation-delay: 8.5s; }
+.particles:nth-child(25) { left: 57%; animation-delay: 10.5s; }
+.particles:nth-child(26) { left: 67%; animation-delay: 12.5s; }
+.particles:nth-child(27) { left: 77%; animation-delay: 14.5s; }
+.particles:nth-child(28) { left: 87%; animation-delay: 16.5s; }
+.particles:nth-child(29) { left: 97%; animation-delay: 18.5s; }
+.particles:nth-child(30) { left: 3%; animation-delay: 1.5s; }
+.particles:nth-child(31) { left: 13%; animation-delay: 3.5s; }
+.particles:nth-child(32) { left: 23%; animation-delay: 5.5s; }
+.particles:nth-child(33) { left: 33%; animation-delay: 7.5s; }
+.particles:nth-child(34) { left: 43%; animation-delay: 9.5s; }
+.particles:nth-child(35) { left: 53%; animation-delay: 11.5s; }
+.particles:nth-child(36) { left: 63%; animation-delay: 13.5s; }
+.particles:nth-child(37) { left: 73%; animation-delay: 15.5s; }
+.particles:nth-child(38) { left: 83%; animation-delay: 17.5s; }
+.particles:nth-child(39) { left: 93%; animation-delay: 19.5s; }
+.particles:nth-child(40) { left: 8%; animation-delay: 0.2s; }
+.particles:nth-child(41) { left: 18%; animation-delay: 2.2s; }
+.particles:nth-child(42) { left: 28%; animation-delay: 4.2s; }
+.particles:nth-child(43) { left: 38%; animation-delay: 6.2s; }
+.particles:nth-child(44) { left: 48%; animation-delay: 8.2s; }
+.particles:nth-child(45) { left: 58%; animation-delay: 10.2s; }
+.particles:nth-child(46) { left: 68%; animation-delay: 12.2s; }
+.particles:nth-child(47) { left: 78%; animation-delay: 14.2s; }
+.particles:nth-child(48) { left: 88%; animation-delay: 16.2s; }
+.particles:nth-child(49) { left: 98%; animation-delay: 18.2s; }
+.particles:nth-child(50) { left: 2%; animation-delay: 1.2s; }
